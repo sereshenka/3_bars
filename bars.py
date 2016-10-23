@@ -47,19 +47,16 @@ def open_json():
         
     
 def biggest_bar(data):
-    if data is not None:
-        return(max(data, key = lambda x: x["Cells"]["SeatsCount"]))
+    return(max(data, key = lambda x: x["Cells"]["SeatsCount"]))
     
 def smallest_bar(data):
-    if data is not None:
-        return (min(data, key = lambda x: x["Cells"]["SeatsCount"]))
+    return (min(data, key = lambda x: x["Cells"]["SeatsCount"]))
     
 
 def geo_bar(data,longitude,latitude):
-    if data is not None:
-        bar_key = lambda x: hypot(x["Cells"]["geoData"]["coordinates"][0]-longitude,x["Cells"]["geoData"]["coordinates"][1]-latitude)
-        geo = min(data, key = bar_key )
-        return (geo)
+    bar_key = lambda x: hypot(x["Cells"]["geoData"]["coordinates"][0]-longitude,x["Cells"]["geoData"]["coordinates"][1]-latitude)
+    geo = min(data, key = bar_key )
+    return (geo)
     
 def print_all(big_bar,small_bar,geo):
     try:
@@ -73,10 +70,13 @@ if __name__ == '__main__':
     print('Введите,пожалуйста,ваши координаты')
     longitude = input1()
     latitude = input2()
-    destination = get_zip()
-    extract_zip(destination)
-    data = open_json()
-    big_bar = biggest_bar(data)
-    small_bar = smallest_bar(data)
-    geo = geo_bar(data,longitude,latitude)
-    print_all(big_bar,small_bar,geo)
+    if longitude and latitude is not None:
+        destination = get_zip()
+        extract_zip(destination)
+        data = open_json()
+        if data is not None:
+            big_bar = biggest_bar(data)
+            small_bar = smallest_bar(data)
+            geo = geo_bar(data,longitude,latitude)
+            print_all(big_bar,small_bar,geo)
+
