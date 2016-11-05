@@ -70,7 +70,6 @@ def print_all(big_bar,small_bar,geo):
 if __name__ == '__main__':
     while True:
         with tempfile.TemporaryDirectory() as tmpdirectory:
-            print(tmpdirectory)
             destination = get_zip(tmpdirectory)
             if destination is None:
                 print('Zip архив не скачался')
